@@ -176,18 +176,18 @@ async function updateData() {
       if (allHeroes) {
           totalWins = allHeroes.game?.games_won || 0;
           totalPlayed = allHeroes.game?.games_played || 0;
-          
+
           const elims = allHeroes.combat?.eliminations || 0;
           const assists = allHeroes.assists?.assists || 0;
           const deaths = allHeroes.combat?.deaths || 0;
-          
+
+          // Tracker.gg KDA Formula: (Elims + (Assists / 2)) / Deaths
           if (deaths > 0) {
-              kda = (elims + assists) / deaths;
+              kda = (elims + (assists / 2)) / deaths;
           } else {
-              kda = elims + assists;
+              kda = elims + (assists / 2);
           }
       }
-
       const winrate = totalPlayed > 0 ? (totalWins / totalPlayed) : 0;
 
       rosterData.push({
