@@ -1,14 +1,16 @@
 {
   "nav": {
     "home": "Home",
+    "about": "About",
     "team": "Team",
     "matches": "Matches",
+    "socials": "Socials",
     "contact": "Contact"
   },
   "hero": {
     "subtitle": "Harbor edge meets fighting spirit",
     "watchFaceit": "Faceit Profile",
-    "joinUs": "Join Us",
+    "joinUs": "Get on Board",
     "followUs": "Follow Us"
   },
   "about": {
@@ -56,5 +58,11 @@
       "placeholderJoin": "TELL US ABOUT YOUR ROLES",
       "placeholderHelp": "HOW CAN WE HELP?"
     }
+  },
+  "footer": {
+    "copyright": "© {{year}} Fischmarkt Fighters Hamburg",
+    "est": "est. in the harbor / competing in the cloud",
+    "imprint": "Imprint",
+    "privacy": "Privacy Policy"
   }
 }

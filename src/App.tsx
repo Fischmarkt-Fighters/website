@@ -1,74 +1,83 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './lib/queryClient';
 import { Header } from './components/Layout/Header';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
+import logo from './assets/logo.png';
 
 // Pages
 import Home from './pages/Home';
-import Team from './pages/Team';
-import Matches from './pages/Matches';
-import Contact from './pages/Contact';
+import Imprint from './pages/Imprint';
+import Privacy from './pages/Privacy';
+
+function ScrollToTop() {
+  const { pathname, hash } = useLocation();
+
+  useEffect(() => {
+    if (hash) {
+      const id = hash.replace('#', '');
+      const element = document.getElementById(id);
+      if (element) {
+        setTimeout(() => {
+          window.scrollTo({
+            top: element.offsetTop - 80,
+            behavior: 'smooth',
+          });
+        }, 100);
+      }
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, hash]);
+
+  return null;
+}
 
 function App() {
+  const { t } = useTranslation();
+
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
+        <ScrollToTop />
         <div className="min-h-screen flex flex-col bg-black font-sans text-white relative selection:bg-white selection:text-black">
-          {/* Background Skeleton Koi Overlay */}
-          <div className="fixed inset-0 pointer-events-none z-0 opacity-[0.03] flex items-center justify-center overflow-hidden">
-             <svg viewBox="0 0 500 500" className="w-[120%] h-[120%] rotate-12 scale-150 fill-none stroke-white">
-                {/* Simplified Koi Skeleton Path Representation */}
-                <path d="M100,250 C100,150 250,50 400,150 C450,200 450,300 400,350 C250,450 100,350 100,250 M150,250 L350,250 M200,200 L200,300 M250,180 L250,320 M300,200 L300,300" strokeWidth="2" />
-                <path d="M400,150 Q450,100 480,150 T450,200" strokeWidth="1" />
-                <path d="M400,350 Q450,400 480,350 T450,300" strokeWidth="1" />
-                <circle cx="130" cy="230" r="5" strokeWidth="1" />
-             </svg>
+          {/* Global Background Logo Overlay */}
+          <div className="fixed inset-0 pointer-events-none z-0 opacity-[0.05] flex items-center justify-center overflow-hidden">
+             <img src={logo} alt="" className="w-[70%] max-w-[900px] h-auto object-contain grayscale" />
           </div>
 
           <Header />
           <main className="flex-1 relative z-10">
-            <AnimatePresence mode="wait">
-              <Routes>
-                <Route 
-                  path="/" 
-                  element={
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                      <Home />
-                    </motion.div>
-                  } 
-                />
-                <Route 
-                  path="/team" 
-                  element={
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                      <Team />
-                    </motion.div>
-                  } 
-                />
-                <Route 
-                  path="/matches" 
-                  element={
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                      <Matches />
-                    </motion.div>
-                  } 
-                />
-                <Route 
-                  path="/contact" 
-                  element={
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                      <Contact />
-                    </motion.div>
-                  } 
-                />
-              </Routes>
-            </AnimatePresence>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/imprint" element={<Imprint />} />
+              <Route path="/privacy" element={<Privacy />} />
+              {/* Fallback to home for any other path */}
+              <Route path="*" element={<Home />} />
+            </Routes>
           </main>
           
-          <footer className="py-20 border-t border-zinc-900 text-center text-[10px] font-mono text-zinc-600 bg-black relative z-10">
-            <p className="uppercase tracking-[0.5em]">&copy; {new Date().getFullYear()} Fischmarkt Fighters Hamburg</p>
-            <p className="mt-4 text-[8px] opacity-50 uppercase tracking-[0.3em]">est. in the harbor / competing in the cloud</p>
+          <footer className="py-24 border-t border-zinc-900 bg-black relative z-10">
+            <div className="container mx-auto px-4 text-center">
+              <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 mb-12">
+                <Link to="/imprint" className="text-sm font-mono uppercase tracking-[0.3em] text-zinc-500 hover:text-white transition-colors">
+                  {t('footer.imprint')}
+                </Link>
+                <Link to="/privacy" className="text-sm font-mono uppercase tracking-[0.3em] text-zinc-500 hover:text-white transition-colors">
+                  {t('footer.privacy')}
+                </Link>
+              </div>
+
+              <div className="space-y-4">
+                <p className="text-base font-sans font-black italic uppercase tracking-wider">
+                  {t('footer.copyright', { year: new Date().getFullYear() })}
+                </p>
+                <p className="text-xs font-mono text-zinc-600 uppercase tracking-[0.5em] opacity-50">
+                  {t('footer.est')}
+                </p>
+              </div>
+            </div>
           </footer>
         </div>
       </BrowserRouter>

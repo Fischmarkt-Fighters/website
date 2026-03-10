@@ -1,7 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 
-// In development we target the backend server directly, in production we use relative paths
 const API_BASE = import.meta.env.DEV ? 'http://localhost:3001/api/faceit' : '/api/faceit';
+
+export interface Player {
+  nickname: string;
+  avatar?: string;
+  battletag?: string;
+  roles: string[];
+  isLeader?: boolean;
+  stats?: any;
+}
 
 export interface Match {
   match_id: string;
@@ -39,7 +47,7 @@ export function useTeamMatches() {
       const data = await res.json();
       return (data.matches || []) as Match[];
     },
-    staleTime: 1000 * 30, // 30 seconds
+    staleTime: 1000 * 30,
   });
 }
 
@@ -52,5 +60,17 @@ export function useLatestChampionship() {
       return await res.json() as Championship;
     },
     staleTime: 1000 * 60 * 5,
+  });
+}
+
+export function useTeamRoster() {
+  return useQuery({
+    queryKey: ['team-roster'],
+    queryFn: async () => {
+      const res = await fetch(`${API_BASE}/roster`);
+      if (!res.ok) return [];
+      return (await res.json()) as Player[];
+    },
+    staleTime: 1000 * 60,
   });
 }

@@ -1,8 +1,10 @@
 {
   "nav": {
     "home": "Home",
+    "about": "Über Uns",
     "team": "Team",
     "matches": "Matches",
+    "socials": "Socials",
     "contact": "Kontakt"
   },
   "hero": {
@@ -56,5 +58,11 @@
       "placeholderJoin": "ERZÄHL UNS VON DEINEN ROLLEN",
       "placeholderHelp": "WIE KÖNNEN WIR HELFEN?"
     }
+  },
+  "footer": {
+    "copyright": "© {{year}} Fischmarkt Fighters Hamburg",
+    "est": "est. in the harbor / competing in the cloud",
+    "imprint": "Impressum",
+    "privacy": "Datenschutz"
   }
 }

@@ -1,75 +1,47 @@
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Button } from '../ui/Button';
-import logo from '../../assets/logo.jpg';
+import gameplayGif from '../../assets/title_bg.gif';
 
 export function Hero() {
   const { t } = useTranslation();
 
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-20 bg-black">
-      {/* Background Video or Clip Overlay */}
+    <section id="home" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-20 bg-black perspective-1000">
+      {/* Background Overlay */}
       <div className="absolute inset-0 z-0 opacity-20 pointer-events-none overflow-hidden">
-        {/* Replace the src with a real Overwatch gameplay clip or a high-quality abstract looping video */}
-        <video 
-          autoPlay 
-          muted 
-          loop 
-          playsInline
-          className="w-full h-full object-cover scale-110"
-        >
-           <source src="https://assets.mixkit.co/videos/preview/mixkit-futuristic-digital-background-with-lines-and-dots-34444-large.mp4" type="video/mp4" />
-        </video>
         <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
       </div>
 
-      {/* Floating Koi Skeletons as background elements */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden opacity-5">
-         <motion.svg 
-            viewBox="0 0 500 500" 
-            className="absolute -left-20 top-20 w-[400px] h-[400px] fill-none stroke-white"
-            animate={{ x: [-20, 20, -20], y: [0, 30, 0], rotate: [0, 5, 0] }}
-            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-         >
-             <path d="M100,250 C100,150 250,50 400,150 C450,200 450,300 400,350 C250,450 100,350 100,250 M150,250 L350,250 M200,200 L200,300 M250,180 L250,320 M300,200 L300,300" strokeWidth="1" />
-         </motion.svg>
-         
-         <motion.svg 
-            viewBox="0 0 500 500" 
-            className="absolute -right-20 bottom-20 w-[500px] h-[500px] fill-none stroke-white"
-            animate={{ x: [20, -20, 20], y: [0, -40, 0], rotate: [0, -10, 0] }}
-            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-         >
-             <path d="M100,250 C100,150 250,50 400,150 C450,200 450,300 400,350 C250,450 100,350 100,250 M150,250 L350,250 M200,200 L200,300 M250,180 L250,320 M300,200 L300,300" strokeWidth="1" />
-         </motion.svg>
-      </div>
-
-      <div className="container mx-auto px-4 z-10 flex flex-col items-center text-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.5, ease: "circOut" }}
-          className="relative mb-8"
-        >
-          <motion.img 
-            src={logo} 
-            alt="Fischmarkt Fighters Logo" 
-            className="w-full max-w-[300px] md:max-w-[400px] h-auto object-contain grayscale brightness-125"
-            animate={{
-              y: [0, -15, 0],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
+      {/* Large Tilted Gameplay Screen Background */}
+      <motion.div 
+        initial={{ opacity: 0, scale: 1.1, rotateY: -15, rotateX: 5 }}
+        animate={{ opacity: 0.4, scale: 1.2, rotateY: -20, rotateX: 8 }}
+        transition={{ 
+          duration: 10, 
+          repeat: Infinity, 
+          repeatType: "reverse", 
+          ease: "easeInOut" 
+        }}
+        className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
+        style={{ perspective: "2000px" }}
+      >
+        <div className="w-full h-full bg-zinc-950">
+          <img 
+            src={gameplayGif} 
+            alt="Gameplay Background"
+            className="w-full h-full object-cover grayscale-[30%] brightness-75"
           />
-        </motion.div>
+          {/* Subtle Screen Overlay to blend with black background */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
+        </div>
+      </motion.div>
 
-        <div className="relative">
+      <div className="container mx-auto px-4 z-10 flex flex-col items-center text-center relative">
+        <div className="relative mb-12">
           {/* Animated Background Text for Title */}
           <motion.h1 
-            className="text-5xl md:text-7xl font-sans font-black uppercase italic tracking-tighter mb-4 text-white leading-none relative z-10"
+            className="text-5xl md:text-8xl font-sans font-black uppercase italic tracking-tighter text-white leading-none relative z-10 drop-shadow-[0_5px_15px_rgba(0,0,0,0.8)]"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}

@@ -17,7 +17,7 @@ export function Matches() {
   const pastMatches = allMatches?.filter(m => m.status === 'finished').slice(0, 3) || [];
 
   return (
-    <section className="py-24" id="matches">
+    <section className="py-24 border-t border-zinc-900 bg-black relative z-10" id="matches">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

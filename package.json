@@ -24,6 +24,7 @@
     "framer-motion": "^12.35.2",
     "i18next": "^25.8.17",
     "lucide-react": "^0.577.0",
+    "nodemailer": "^8.0.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.71.2",

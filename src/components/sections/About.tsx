@@ -5,15 +5,7 @@ export function About() {
   const { t } = useTranslation();
 
   return (
-    <section className="py-24 relative overflow-hidden">
-      {/* Subtle Background Accent */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-[0.02] pointer-events-none">
-        <svg viewBox="0 0 100 100" className="w-full h-full stroke-white fill-none">
-          <path d="M10,50 Q30,10 50,50 T90,50" strokeWidth="0.5" />
-          <path d="M10,60 Q30,20 50,60 T90,60" strokeWidth="0.5" />
-        </svg>
-      </div>
-
+    <section id="about" className="py-24 relative overflow-hidden border-t border-zinc-900 bg-black z-10">
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
