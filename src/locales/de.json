@@ -1,0 +1,60 @@
+{
+  "nav": {
+    "home": "Home",
+    "team": "Team",
+    "matches": "Matches",
+    "contact": "Kontakt"
+  },
+  "hero": {
+    "subtitle": "Hafenkante trifft Kampfgeist",
+    "watchFaceit": "Faceit Profil",
+    "joinUs": "Komm an Bord",
+    "followUs": "Folgt uns"
+  },
+  "about": {
+    "title": "Moin aus dem <span class='text-white'>Hafen</span>",
+    "description": "Wir sind die Fischmarkt Fighters – ein frisch gegründeter Overwatch-Esports-Club direkt aus Hamburg. Wir sind ein junges Team, das gerade erst angefangen hat, in der kompetitiven Szene mitzumischen. Unser Ziel ist es, gemeinsam zu wachsen, zu lernen und Hamburg in der Overwatch-Welt würdig zu vertreten. Wir stehen für den Grind, den Hamburger Spirit und vor allem für den Spaß am Spiel, während wir uns nach oben kämpfen.",
+    "cta": "Mehr erfahren"
+  },
+  "roster": {
+    "title": "Unser Roster",
+    "role": "Rolle",
+    "main": "MAIN:",
+    "elo": "Faceit ELO",
+    "topHeroes": "Top Helden",
+    "privateProfile": "Profil Privat / Keine Daten"
+  },
+  "matches": {
+    "title": "Matches & Turniere",
+    "noMatches": "Bisher keine Matches aufgezeichnet.",
+    "noUpcoming": "Aktuell sind keine neuen Matches geplant.",
+    "noPast": "Keine kürzlichen Matches in der Historie gefunden.",
+    "loading": "Suche nach Einträgen...",
+    "faceitButton": "Auf Faceit ansehen",
+    "upcoming": "Anstehend",
+    "history": "Historie",
+    "latestTournament": "Letztes Turnier",
+    "tournamentDetails": "Turnier Details",
+    "teamForm": "Team Form (Letzte 10)",
+    "win": "Sieg",
+    "loss": "Niederlage",
+    "vs": "vs."
+  },
+  "contact": {
+    "title": "Komm an Bord",
+    "tabs": {
+      "contact": "Kontakt",
+      "join": "Mitspielen"
+    },
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "discord": "Discord Tag",
+      "message": "Nachricht",
+      "submit": "Abschicken",
+      "success": "Moin! Nachricht ist raus.",
+      "placeholderJoin": "ERZÄHL UNS VON DEINEN ROLLEN",
+      "placeholderHelp": "WIE KÖNNEN WIR HELFEN?"
+    }
+  }
+}

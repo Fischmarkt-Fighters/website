@@ -1,0 +1,60 @@
+{
+  "nav": {
+    "home": "Home",
+    "team": "Team",
+    "matches": "Matches",
+    "contact": "Contact"
+  },
+  "hero": {
+    "subtitle": "Harbor edge meets fighting spirit",
+    "watchFaceit": "Faceit Profile",
+    "joinUs": "Join Us",
+    "followUs": "Follow Us"
+  },
+  "about": {
+    "title": "Born in the <span class='text-white'>Harbor</span>",
+    "description": "We are the Fischmarkt Fighters – a newly founded Overwatch Esports club straight from Hamburg. We're a fresh squad just starting our journey in the competitive scene. Our goal is to grow together, learn from every match, and represent Hamburg with pride in the world of Overwatch. We're all about the grind, the Hamburg spirit, and above all, the passion for competing as we fight our way up.",
+    "cta": "Learn more"
+  },
+  "roster": {
+    "title": "Our Roster",
+    "role": "Role",
+    "main": "MAIN:",
+    "elo": "Faceit ELO",
+    "topHeroes": "Top Heroes",
+    "privateProfile": "Profile Private / No Data"
+  },
+  "matches": {
+    "title": "Matches & Tournaments",
+    "noMatches": "No matches recorded yet.",
+    "noUpcoming": "No upcoming matches currently scheduled.",
+    "noPast": "No recent match history found.",
+    "loading": "Searching for records...",
+    "faceitButton": "View on Faceit",
+    "upcoming": "Upcoming",
+    "history": "History",
+    "latestTournament": "Latest Tournament",
+    "tournamentDetails": "Tournament Details",
+    "teamForm": "Team Form (Last 10)",
+    "win": "Win",
+    "loss": "Loss",
+    "vs": "vs."
+  },
+  "contact": {
+    "title": "Get on Board",
+    "tabs": {
+      "contact": "Contact",
+      "join": "Join Us"
+    },
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "discord": "Discord Tag",
+      "message": "Message",
+      "submit": "Send",
+      "success": "Cheers! Message received.",
+      "placeholderJoin": "TELL US ABOUT YOUR ROLES",
+      "placeholderHelp": "HOW CAN WE HELP?"
+    }
+  }
+}
