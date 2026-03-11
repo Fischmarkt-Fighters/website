@@ -24,7 +24,7 @@ steps:
       password:
         from_secret: ssh_password
       source: deploy/
-      target: /var/lib/docker/volumes/website/_data
+      target: /var/lib/docker/volumes/ff_website/_data
       strip_components: 1
 
   - name: Deploy
@@ -44,6 +44,6 @@ steps:
             --restart always \
             -p 680:3001 \
             -p 6443:3001 \
-            -v website:/app \
+            -v ff_website:/app \
             -w /app \
             node:20-alpine node server.mjs
