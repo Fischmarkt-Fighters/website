@@ -260,6 +260,14 @@ app.get('/api/faceit/matches', (req, res) => res.json({ matches: cachedMatches, 
 app.get('/api/faceit/latest-championship', (req, res) => res.json(cachedChampionship));
 app.get('/api/faceit/roster', (req, res) => res.json(cachedRoster));
 
+app.get('/api/config/imprint', (req, res) => {
+  res.json({
+    name: process.env.VITE_IMPRINT_NAME || "[NAME]",
+    street: process.env.VITE_IMPRINT_STREET || "[STRASSE HAUSNUMMER]",
+    city: process.env.VITE_IMPRINT_CITY || "[PLZ ORT]"
+  });
+});
+
 app.post('/api/contact', async (req, res) => {
   const { name, email, message } = req.body;
   if (!name || !email || !message) return res.status(400).json({ error: 'Alle Felder müssen ausgefüllt sein.' });

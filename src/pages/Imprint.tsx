@@ -1,11 +1,22 @@
 import { useTranslation } from 'react-i18next';
+import { useEffect, useState } from 'react';
 
 export default function Imprint() {
   const { t } = useTranslation();
+  const [imprintData, setImprintData] = useState({
+    name: "[NAME]",
+    street: "[STRASSE HAUSNUMMER]",
+    city: "[PLZ ORT]"
+  });
 
-  const name = import.meta.env.VITE_IMPRINT_NAME || "[NAME]";
-  const street = import.meta.env.VITE_IMPRINT_STREET || "[STRASSE HAUSNUMMER]";
-  const city = import.meta.env.VITE_IMPRINT_CITY || "[PLZ ORT]";
+  useEffect(() => {
+    fetch('/api/config/imprint')
+      .then(res => res.json())
+      .then(data => setImprintData(data))
+      .catch(err => console.error("Failed to load imprint data:", err));
+  }, []);
+
+  const { name, street, city } = imprintData;
 
   return (
     <div className="container mx-auto px-4 py-32 max-w-4xl min-h-[70vh]">
