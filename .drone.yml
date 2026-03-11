@@ -36,11 +36,11 @@ steps:
       password:
         from_secret: ssh_password
       script:
-        - docker stop website || true
-        - docker rm website || true
+        - docker stop ff_website || true
+        - docker rm ff_website || true
         - |
           docker run -d \
-            --name website \
+            --name ff_website \
             --restart always \
             -p 680:3001 \
             -p 6443:3001 \
