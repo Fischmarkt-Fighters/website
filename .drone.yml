@@ -1,0 +1,49 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+  - name: Build
+    image: node:20
+    commands:
+      - npm install
+      - npm run build
+      - mkdir deploy
+      - cp -rv dist deploy/
+      - cp server.mjs deploy/
+      - cp package.json deploy/
+      - cp package-lock.json deploy/
+      - cd deploy && npm install --omit=dev
+
+  - name: Upload
+    image: appleboy/drone-scp
+    settings:
+      host:
+        from_secret: address
+      username: root
+      password:
+        from_secret: ssh_password
+      source: deploy/
+      target: /var/lib/docker/volumes/website/_data
+      strip_components: 1
+
+  - name: Deploy
+    image: appleboy/drone-ssh
+    settings:
+      host:
+        from_secret: address
+      username: root
+      password:
+        from_secret: ssh_password
+      script:
+        - docker stop website || true
+        - docker rm website || true
+        - |
+          docker run -d \
+            --name website \
+            --restart always \
+            -p 780:3001 \
+            -p 6443:3001 \
+            -v website:/app \
+            -w /app \
+            node:20-alpine node server.mjs
