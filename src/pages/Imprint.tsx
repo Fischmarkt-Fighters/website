@@ -3,17 +3,20 @@ import { useEffect, useState } from 'react';
 
 export default function Imprint() {
   const { t } = useTranslation();
-  const [imprintData, setImprintData] = useState({
+  const [imprintData, setImprintData] = useState((window as any).APP_CONFIG?.imprint || {
     name: "[NAME]",
     street: "[STRASSE HAUSNUMMER]",
     city: "[PLZ ORT]"
   });
 
   useEffect(() => {
-    fetch('/api/config/imprint')
-      .then(res => res.json())
-      .then(data => setImprintData(data))
-      .catch(err => console.error("Failed to load imprint data:", err));
+    // Falls die Config noch nicht da ist oder wir sie aktualisieren wollen
+    if (! (window as any).APP_CONFIG?.imprint) {
+      fetch('/api/config/imprint')
+        .then(res => res.json())
+        .then(data => setImprintData(data))
+        .catch(err => console.error("Failed to load imprint data:", err));
+    }
   }, []);
 
   const { name, street, city } = imprintData;

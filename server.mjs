@@ -268,6 +268,17 @@ app.get('/api/config/imprint', (req, res) => {
   });
 });
 
+app.get('/config.js', (req, res) => {
+  const config = {
+    imprint: {
+      name: process.env.VITE_IMPRINT_NAME || "[NAME]",
+      street: process.env.VITE_IMPRINT_STREET || "[STRASSE HAUSNUMMER]",
+      city: process.env.VITE_IMPRINT_CITY || "[PLZ ORT]"
+    }
+  };
+  res.type('.js').send(`window.APP_CONFIG = ${JSON.stringify(config)};`);
+});
+
 app.post('/api/contact', async (req, res) => {
   const { name, email, message } = req.body;
   if (!name || !email || !message) return res.status(400).json({ error: 'Alle Felder müssen ausgefüllt sein.' });
