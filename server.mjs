@@ -84,43 +84,84 @@ async function resolveBattletag(name) {
 
 async function overfastFetch(battletag) {
   const formattedId = battletag.replace('#', '-');
-  
   try {
-    // 1. Basic Summary
     const summaryRes = await fetch(`https://overfast-api.tekrop.fr/players/${encodeURIComponent(formattedId)}/summary`);
     const summary = summaryRes.ok ? await summaryRes.json() : null;
     
-    // 2. Career Stats (Current Season, Competitive, liefert detaillierte Helden-Zeiten und Gesamtstats)
-    const careerRes = await fetch(`https://overfast-api.tekrop.fr/players/${encodeURIComponent(formattedId)}/stats/career?gamemode=competitive&platform=pc`);
-    const careerStats = careerRes.ok ? await careerRes.json() : null;
+    // Saisonale Stats (Current) via Career Endpoint
+    // Ohne season Parameter liefert Blizzard/Overfast oft die "Current Season" 
+    // oder die letzte aktive Auswahl. Um sicherzugehen, nutzen wir hier die Standard-Abfrage.
+    const fetchSeasonStats = async (mode) => {
+        try {
+            const res = await fetch(`https://overfast-api.tekrop.fr/players/${encodeURIComponent(formattedId)}/stats/career?gamemode=${mode}&platform=pc`);
+            if (!res.ok) return null;
+            const careerStats = await res.json();
+            return processCareerData(careerStats);
+        } catch (e) { return null; }
+    };
 
-    // Helden-Icons laden (Top 3 nach echter Spielzeit)
-    const topHeroes = [];
-    if (careerStats) {
+    // Lifetime Stats (Aggregiert)
+    // Bei Blizzard/Overfast ist 'quickplay' meist inhärent Lifetime.
+    // Für 'competitive' Lifetime müssen wir oft sicherstellen, dass die aggregierten Daten kommen.
+    // Der Summary-Endpunkt OHNE Saison-Angabe aggregiert laut Doku alle Saisons.
+    const fetchLifetimeStats = async (mode) => {
+        try {
+            // Wir nutzen hier den Summary-Endpunkt ohne den fehlerhaften 'season=all' Parameter
+            const res = await fetch(`https://overfast-api.tekrop.fr/players/${encodeURIComponent(formattedId)}/stats/summary?gamemode=${mode}&platform=pc`);
+            if (!res.ok) return null;
+            const data = await res.json();
+            if (!data.general) return null;
+
+            const heroesList = [];
+            if (data.heroes) {
+                for (const [name, heroData] of Object.entries(data.heroes)) {
+                    if (heroData.time_played) heroesList.push({ name, playtime: heroData.time_played });
+                }
+            }
+            heroesList.sort((a, b) => b.playtime - a.playtime);
+            const enrichedHeroes = {};
+            for (const hero of heroesList.slice(0, 3)) {
+                enrichedHeroes[hero.name] = { playtime: hero.playtime, icon: await getHeroIcon(hero.name) };
+            }
+
+            return {
+                winrate: data.general.games_played > 0 ? (data.general.winrate || 0) / 100 : 0,
+                gamesWon: data.general.games_won || 0,
+                gamesPlayed: data.general.games_played || 0,
+                kda: (data.general.kda || 0).toFixed(2),
+                topHeroes: enrichedHeroes
+            };
+        } catch (e) { return null; }
+    };
+
+    // Hilfsfunktion zur Verarbeitung von Career-Daten (wird für Season genutzt)
+    const processCareerData = async (careerStats) => {
+        const allHeroes = careerStats['all-heroes'];
+        if (!allHeroes) return null;
+        const totalWins = allHeroes.game?.games_won || 0;
+        const totalPlayed = allHeroes.game?.games_played || 0;
+        const elims = allHeroes.combat?.eliminations || 0;
+        const assists = allHeroes.assists?.assists || 0;
+        const deaths = allHeroes.combat?.deaths || 0;
+        const kda = deaths > 0 ? (elims + (assists / 2)) / deaths : (elims + (assists / 2));
+        const topHeroesList = [];
         for (const key of Object.keys(careerStats)) {
-            if (key !== 'all-heroes' && careerStats[key] && careerStats[key].game && careerStats[key].game.time_played) {
-                topHeroes.push({ name: key, playtime: careerStats[key].game.time_played });
+            if (key !== 'all-heroes' && careerStats[key]?.game?.time_played) {
+                topHeroesList.push({ name: key, playtime: careerStats[key].game.time_played });
             }
         }
-    }
-    
-    // Sortieren und auf Top 3 beschneiden
-    topHeroes.sort((a, b) => b.playtime - a.playtime);
-    const selectedHeroes = topHeroes.slice(0, 3);
-    
-    const enrichedHeroes = {};
-    for (const hero of selectedHeroes) {
-        enrichedHeroes[hero.name] = { 
-            playtime: hero.playtime, 
-            icon: await getHeroIcon(hero.name) 
-        };
-    }
-    
-    return { 
-        summary, 
-        career: careerStats, 
-        topHeroes: enrichedHeroes 
+        topHeroesList.sort((a, b) => b.playtime - a.playtime);
+        const enrichedHeroes = {};
+        for (const hero of topHeroesList.slice(0, 3)) {
+            enrichedHeroes[hero.name] = { playtime: hero.playtime, icon: await getHeroIcon(hero.name) };
+        }
+        return { winrate: totalPlayed > 0 ? (totalWins / totalPlayed) : 0, gamesWon: totalWins, gamesPlayed: totalPlayed, kda: kda.toFixed(2), topHeroes: enrichedHeroes };
     };
+
+    const competitive_season = await fetchSeasonStats('competitive');
+    const quickplay_lifetime = await fetchLifetimeStats('quickplay');
+
+    return { summary, competitive_season, quickplay_lifetime };
   } catch (err) { return null; }
 }
 
@@ -149,7 +190,6 @@ async function updateData() {
       if (!data) continue;
 
       let bestRank = null;
-      
       if (data?.summary?.competitive?.pc) {
           const ranks = data.summary.competitive.pc;
           const roles = ['tank', 'damage', 'support', 'open'];
@@ -167,43 +207,17 @@ async function updateData() {
           });
       }
 
-      // Wahre Aggregation aus dem 'all-heroes' Block der Career-Stats (Current Season, Competitive, All Queues)
-      let totalWins = 0;
-      let totalPlayed = 0;
-      let kda = 0;
-
-      const allHeroes = data?.career?.['all-heroes'];
-      if (allHeroes) {
-          totalWins = allHeroes.game?.games_won || 0;
-          totalPlayed = allHeroes.game?.games_played || 0;
-
-          const elims = allHeroes.combat?.eliminations || 0;
-          const assists = allHeroes.assists?.assists || 0;
-          const deaths = allHeroes.combat?.deaths || 0;
-
-          // Tracker.gg KDA Formula: (Elims + (Assists / 2)) / Deaths
-          if (deaths > 0) {
-              kda = (elims + (assists / 2)) / deaths;
-          } else {
-              kda = elims + (assists / 2);
-          }
-      }
-      const winrate = totalPlayed > 0 ? (totalWins / totalPlayed) : 0;
-
       rosterData.push({
         nickname: battletag.split('#')[0],
         battletag: battletag,
         avatar: data?.summary?.avatar || null,
         roles: customRoles,
         isLeader: battletag === leaderTag || item === leaderTag,
-        stats: { 
-            bestRank, 
-            winrate,
-            gamesWon: totalWins,
-            gamesPlayed: totalPlayed,
-            kda: kda.toFixed(2),
-            topHeroes: data?.topHeroes || {},
-            endorsement: data?.summary?.endorsement || { level: 1 }
+        bestRank,
+        endorsement: data?.summary?.endorsement || { level: 1 },
+        stats: {
+            competitive_season: data.competitive_season,
+            quickplay_lifetime: data.quickplay_lifetime
         }
       });
       await sleep(500); 

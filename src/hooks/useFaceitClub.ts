@@ -8,7 +8,31 @@ export interface Player {
   battletag?: string;
   roles: string[];
   isLeader?: boolean;
-  stats?: any;
+  bestRank?: {
+    division: string;
+    tier: string;
+    rank_icon: string;
+  };
+  endorsement?: {
+    level: number;
+    frame: string;
+  };
+  stats: {
+    competitive_season: {
+        winrate: number;
+        gamesWon: number;
+        gamesPlayed: number;
+        kda: string;
+        topHeroes: any;
+    } | null;
+    quickplay_lifetime: {
+        winrate: number;
+        gamesWon: number;
+        gamesPlayed: number;
+        kda: string;
+        topHeroes: any;
+    } | null;
+  };
 }
 
 export interface Match {

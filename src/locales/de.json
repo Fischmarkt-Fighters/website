@@ -24,7 +24,12 @@
     "main": "MAIN:",
     "elo": "Faceit ELO",
     "topHeroes": "Top Helden",
-    "privateProfile": "Profil Privat / Keine Daten"
+    "privateProfile": "Profil Privat / Keine Daten",
+    "statsMode": {
+      "competitive_season": "Competitive (Saison)",
+      "quickplay_lifetime": "Quick Play (Lifetime)",
+      "label": "Statistiken:"
+    }
   },
   "matches": {
     "title": "Matches & Turniere",
@@ -61,7 +66,6 @@
   },
   "footer": {
     "copyright": "© {{year}} Fischmarkt Fighters Hamburg",
-    "est": "est. in the harbor / competing in the cloud",
     "imprint": "Impressum",
     "privacy": "Datenschutz"
   }

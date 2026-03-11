@@ -48,6 +48,24 @@ export default function Imprint() {
 
         <section>
           <h2 className="text-xl font-bold text-white uppercase tracking-widest mb-4">
+            {isEn ? "Disclaimer" : "Haftungsausschluss / Disclaimer"}
+          </h2>
+          <div className="space-y-4">
+            <p>
+              {isEn 
+                ? "Fischmarkt Fighters is not affiliated with, associated with, or endorsed by FACEIT, Blizzard Entertainment, or Overwatch. All trademarks are the property of their respective owners." 
+                : "Fischmarkt Fighters steht in keiner geschäftlichen oder rechtlichen Verbindung zu FACEIT, Blizzard Entertainment oder Overwatch. Sämtliche Markenrechte liegen bei ihren jeweiligen Eigentümern."}
+            </p>
+            <p>
+              {isEn
+                ? "Fischmarkt Fighters is a private e-sports team. It is not a registered association (e.V.) or a commercial enterprise."
+                : "Bei Fischmarkt Fighters handelt es sich um ein privates E-Sports-Team. Es ist weder ein eingetragener Verein (e.V.) noch ein gewerbliches Unternehmen."}
+            </p>
+          </div>
+        </section>
+
+        <section>
+          <h2 className="text-xl font-bold text-white uppercase tracking-widest mb-4">
             {isEn ? "Consumer dispute resolution" : "Verbraucherstreitbeilegung"}
           </h2>
           <p>

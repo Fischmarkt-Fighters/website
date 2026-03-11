@@ -73,9 +73,6 @@ function App() {
                 <p className="text-base font-sans font-black italic uppercase tracking-wider">
                   {t('footer.copyright', { year: new Date().getFullYear() })}
                 </p>
-                <p className="text-xs font-mono text-zinc-600 uppercase tracking-[0.5em] opacity-50">
-                  {t('footer.est')}
-                </p>
               </div>
             </div>
           </footer>
