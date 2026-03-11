@@ -1,8 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
 export default function Imprint() {
-  const { t, i18n } = useTranslation();
-  const isEn = i18n.language === 'en';
+  const { t } = useTranslation();
 
   const name = import.meta.env.VITE_IMPRINT_NAME || "[NAME]";
   const street = import.meta.env.VITE_IMPRINT_STREET || "[STRASSE HAUSNUMMER]";
@@ -16,7 +15,7 @@ export default function Imprint() {
       <div className="prose prose-invert max-w-none font-sans text-zinc-400 space-y-8">
         <section>
           <h2 className="text-xl font-bold text-white uppercase tracking-widest mb-4">
-            {isEn ? "Information according to § 5 Digital Services Act (DDG)" : "Angaben gemäß § 5 Digitale-Dienste-Gesetz (DDG)"}
+            {t('imprint.section_ddg')}
           </h2>
           <p>
             Fischmarkt Fighters<br />
@@ -28,7 +27,7 @@ export default function Imprint() {
 
         <section>
           <h2 className="text-xl font-bold text-white uppercase tracking-widest mb-4">
-            {isEn ? "Contact" : "Kontakt"}
+            {t('imprint.section_contact')}
           </h2>
           <p>
             E-Mail: contact@fischmarktfighters.de
@@ -37,7 +36,7 @@ export default function Imprint() {
 
         <section>
           <h2 className="text-xl font-bold text-white uppercase tracking-widest mb-4">
-            {isEn ? "Editorial responsibility" : "Redaktionell verantwortlich"}
+            {t('imprint.section_editorial')}
           </h2>
           <p>
             {name}<br />
@@ -48,30 +47,24 @@ export default function Imprint() {
 
         <section>
           <h2 className="text-xl font-bold text-white uppercase tracking-widest mb-4">
-            {isEn ? "Disclaimer" : "Haftungsausschluss / Disclaimer"}
+            {t('imprint.section_disclaimer')}
           </h2>
           <div className="space-y-4">
             <p>
-              {isEn 
-                ? "Fischmarkt Fighters is not affiliated with, associated with, or endorsed by FACEIT, Blizzard Entertainment, or Overwatch. All trademarks are the property of their respective owners." 
-                : "Fischmarkt Fighters steht in keiner geschäftlichen oder rechtlichen Verbindung zu FACEIT, Blizzard Entertainment oder Overwatch. Sämtliche Markenrechte liegen bei ihren jeweiligen Eigentümern."}
+              {t('imprint.disclaimer_text1')}
             </p>
             <p>
-              {isEn
-                ? "Fischmarkt Fighters is a private e-sports team. It is not a registered association (e.V.) or a commercial enterprise."
-                : "Bei Fischmarkt Fighters handelt es sich um ein privates E-Sports-Team. Es ist weder ein eingetragener Verein (e.V.) noch ein gewerbliches Unternehmen."}
+              {t('imprint.disclaimer_text2')}
             </p>
           </div>
         </section>
 
         <section>
           <h2 className="text-xl font-bold text-white uppercase tracking-widest mb-4">
-            {isEn ? "Consumer dispute resolution" : "Verbraucherstreitbeilegung"}
+            {t('imprint.section_dispute')}
           </h2>
           <p>
-            {isEn 
-              ? "We are not willing or obliged to participate in dispute resolution proceedings before a consumer arbitration board." 
-              : "Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen."}
+            {t('imprint.dispute_text')}
           </p>
         </section>
       </div>

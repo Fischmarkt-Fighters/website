@@ -5,10 +5,10 @@ export default function Privacy() {
   const isEn = i18n.language === 'en';
 
   // Load from environment variables
-  const name = import.meta.env.VITE_IMPRINT_NAME || "[Name]";
-  const street = import.meta.env.VITE_IMPRINT_STREET || "[Adresse]";
-  const city = import.meta.env.VITE_IMPRINT_CITY || "";
-  const fullAddress = `${street}${city ? ', ' + city : ''}`;
+  const name = import.meta.env.VITE_IMPRINT_NAME || "Matti Bitomsky";
+  const street = import.meta.env.VITE_IMPRINT_STREET || "Lerchenweg 2";
+  const city = import.meta.env.VITE_IMPRINT_CITY || "27383 Scheeßel";
+  const fullAddress = `${street}, ${city}`;
 
   return (
     <div className="container mx-auto px-4 py-32 max-w-4xl min-h-[70vh]">
@@ -53,8 +53,8 @@ export default function Privacy() {
           </h4>
           <p>
             {isEn
-              ? "Part of the data is collected to ensure error-free provision of the website. Other data can be used to analyze your user behavior. If contracts can be concluded or initiated via the website, the transmitted data will also be processed for contract offers, orders, or other order requests."
-              : "Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der Website zu gewährleisten. Andere Daten können zur Analyse Ihres Nutzerverhaltens verwendet werden. Sofern über die Website Verträge geschlossen oder angebahnt werden können, werden die übermittelten Daten auch für Vertragsangebote, Bestellungen oder sonstige Auftragsanfragen verarbeitet."}
+              ? "Part of the data is collected to ensure error-free provision of the website. Other data can be used to analyze your user behavior."
+              : "Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der Website zu gewährleisten. Andere Daten können zur Analyse Ihres Nutzerverhaltens verwendet werden."}
           </p>
         </section>
 
@@ -76,8 +76,8 @@ export default function Privacy() {
           </p>
           <p>
             {isEn
-              ? "The use of Hetzner is based on Art. 6 (1) (f) GDPR. We have a legitimate interest in the most reliable presentation of our website. If a corresponding consent has been requested, the processing takes place exclusively on the basis of Art. 6 (1) (a) GDPR and § 25 (1) TDDDG, insofar as the consent includes the storage of cookies or access to information in the user's terminal device (e.g., device fingerprinting) within the meaning of the TDDDG. The consent is revocable at any time."
-              : "Die Verwendung von Hetzner erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Wir haben ein berechtigtes Interesse an einer möglichst zuverlässigen Darstellung unserer Website. Sofern eine entsprechende Einwilligung abgefragt wurde, erfolgt die Verarbeitung ausschließlich auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG, soweit die Einwilligung die Speicherung von Cookies oder den Zugriff auf Informationen im Endgerät des Nutzers (z. B. Device-Fingerprinting) im Sinne des TDDDG umfasst. Die Einwilligung ist jederzeit widerrufbar."}
+              ? "The use of Hetzner is based on Art. 6 (1) (f) GDPR. We have a legitimate interest in the most reliable presentation of our website."
+              : "Die Verwendung von Hetzner erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Wir haben ein berechtigtes Interesse an einer möglichst zuverlässigen Darstellung unserer Website."}
           </p>
         </section>
 
@@ -97,7 +97,7 @@ export default function Privacy() {
             {isEn ? "Information on the Responsible Body" : "Hinweis zur verantwortlichen Stelle"}
           </h3>
           <p>
-            {isEn ? "The responsible body for data processing on this website is:" : "Die verantwortliche Stelle für die Daten verarbeitung auf dieser Website ist:"}
+            {isEn ? "The responsible body for data processing on this website is:" : "Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:"}
           </p>
           <p>
             {name}<br />
@@ -106,18 +106,23 @@ export default function Privacy() {
           <p>
             E-Mail: contact@fischmarktfighters.de
           </p>
-          <p className="mt-4">
-            {isEn
-              ? "The responsible body is the natural or legal person who alone or jointly with others decides on the purposes and means of processing personal data (e.g., names, email addresses, etc.)."
-              : "Verantwortliche Stelle ist die natürliche oder juristische Person, die allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten (z. B. Namen, E-Mail-Adressen o. Ä.) entscheidet."}
-          </p>
+          
           <h3 className="text-lg font-semibold text-zinc-200 mt-6 mb-2">
             {isEn ? "Storage Period" : "Speicherdauer"}
           </h3>
           <p>
             {isEn
-              ? "Unless a more specific storage period has been mentioned within this privacy policy, your personal data will remain with us until the purpose for data processing no longer applies. If you assert a legitimate request for deletion or revoke consent to data processing, your data will be deleted unless we have other legally permissible reasons for storing your personal data (e.g., tax or commercial retention periods); in the latter case, the deletion takes place after these reasons no longer apply."
-              : "Soweit innerhalb dieser Datenschutzerklärung keine speziellere Speicherdauer genannt wurde, verbleiben Ihre personenbezogenen Daten bei uns, bis der Zweck für die Datenverarbeitung entfällt. Wenn Sie ein berechtigtes Löschersuchen geltend machen oder eine Einwilligung zur Datenverarbeitung widerrufen, werden Ihre Daten gelöscht, sofern wir keine anderen rechtlich zulässigen Gründe für die Speicherung Ihrer personenbezogenen Daten haben (z. B. steuer- oder handelsrechtliche Aufbewahrungsfristen); im letztgenannten Fall erfolgt die Löschung nach Fortfall dieser Gründe."}
+              ? "Unless a more specific storage period has been mentioned within this privacy policy, your personal data will remain with us until the purpose for data processing no longer applies. If you assert a legitimate request for deletion or revoke consent to data processing, your data will be deleted unless we have other legally permissible reasons for storing your personal data."
+              : "Soweit innerhalb dieser Datenschutzerklärung keine speziellere Speicherdauer genannt wurde, verbleiben Ihre personenbezogenen Daten bei uns, bis der Zweck für die Datenverarbeitung entfällt. Wenn Sie ein berechtigtes Löschersuchen geltend machen oder eine Einwilligung zur Datenverarbeitung widerrufen, werden Ihre Daten gelöscht, sofern wir keine anderen rechtlich zulässigen Gründe für die Speicherung Ihrer personenbezogenen Daten haben."}
+          </p>
+
+          <h3 className="text-lg font-semibold text-zinc-200 mt-6 mb-2">
+            {isEn ? "SSL or TLS Encryption" : "SSL- bzw. TLS-Verschlüsselung"}
+          </h3>
+          <p>
+            {isEn
+              ? "This site uses SSL or TLS encryption for security reasons and to protect the transmission of confidential content, such as orders or inquiries that you send to us as the site operator."
+              : "Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte, wie zum Beispiel Bestellungen oder Anfragen, die Sie an uns als Seitenbetreiber senden, eine SSL- bzw. TLS-Verschlüsselung."}
           </p>
         </section>
 
@@ -141,16 +146,6 @@ export default function Privacy() {
             <li>{isEn ? "Time of server request" : "Uhrzeit der Serveranfrage"}</li>
             <li>{isEn ? "IP address" : "IP-Adresse"}</li>
           </ul>
-          <p className="mt-4">
-            {isEn
-              ? "A merge of this data with other data sources is not performed."
-              : "Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen."}
-          </p>
-          <p>
-            {isEn
-              ? "The collection of this data is based on Art. 6 (1) (f) GDPR. The website operator has a legitimate interest in the technically error-free presentation and optimization of his website - for this purpose, the server log files must be recorded."
-              : "Die Erfassung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Der Websitebetreiber hat ein berechtigtes Interesse an der technisch fehlerfreien Darstellung und der Optimierung seiner Website – hierzu müssen die Server-Log-Files erfasst werden."}
-          </p>
           
           <h3 className="text-lg font-semibold text-zinc-200 mt-8 mb-2">
             {isEn ? "Contact Form" : "Kontaktformular"}
@@ -160,19 +155,16 @@ export default function Privacy() {
               ? "If you send us inquiries via the contact form, your details from the inquiry form, including the contact details provided there, will be stored by us for the purpose of processing the inquiry and in case of follow-up questions. We do not give this data to third parties without your consent."
               : "Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter."}
           </p>
-          <p>
-            {isEn
-              ? "The processing of this data is based on Art. 6 (1) (b) GDPR if your inquiry is related to the performance of a contract or is necessary for the implementation of pre-contractual measures. In all other cases, processing is based on our legitimate interest in the effective processing of inquiries addressed to us (Art. 6 (1) (f) GDPR) or on your consent (Art. 6 (1) (a) GDPR) if this has been requested; the consent can be revoked at any time."
-              : "Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist. In allen übrigen Fällen beruht die Verarbeitung auf unserem berechtigten Interesse an der effektiven Bearbeitung der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO) oder auf Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO) sofern diese abgefragt wurde; die Einwilligung ist jederzeit widerrufbar."}
-          </p>
         </section>
 
         <section>
           <h2 className="text-xl font-bold text-white uppercase tracking-widest mb-4">
-            {isEn ? "5. Your Rights" : "7. Ihre Rechte"}
+            {isEn ? "5. Your Rights" : "5. Ihre Rechte"}
           </h2>
           <p>
-            {isEn ? "You have the following rights regarding your personal data:" : "Sie haben folgende Rechte hinsichtlich Ihrer personenbezogenen Daten:"}
+            {isEn 
+              ? "You have the right at any time to receive information free of charge about the origin, recipient, and purpose of your stored personal data. You also have a right to request the correction or deletion of this data." 
+              : "Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht, die Berichtigung oder Löschung dieser Daten zu verlangen."}
           </p>
           <ul className="list-disc ml-6 space-y-2">
             <li>{isEn ? "Access (Art. 15 GDPR)" : "Auskunft (Art. 15 DSGVO)"}</li>

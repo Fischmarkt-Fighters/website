@@ -25,6 +25,23 @@
     "elo": "Faceit ELO",
     "topHeroes": "Top Heroes",
     "privateProfile": "Profile Private / No Data",
+    "bestRank": "Best Rank (Season)",
+    "unranked": "Unranked",
+    "mainSelection": "Main Selection",
+    "teamLeader": "Team Leader",
+    "roles": {
+      "tank": "Tank",
+      "damage": "Damage",
+      "support": "Support",
+      "flex": "Flex",
+      "coach": "Coach"
+    },
+    "stats": {
+      "winrate": "Winrate",
+      "kda": "KDA Ratio",
+      "totalWins": "Total Wins",
+      "matches": "Matches"
+    },
     "statsMode": {
       "competitive_season": "Competitive (Season)",
       "quickplay_lifetime": "Quick Play (Lifetime)",
@@ -45,7 +62,10 @@
     "teamForm": "Team Form (Last 10)",
     "win": "Win",
     "loss": "Loss",
-    "vs": "vs."
+    "vs": "vs.",
+    "status": "Status",
+    "tbd": "TBD",
+    "upcomingStatus": "UPCOMING"
   },
   "contact": {
     "title": "Get on Board",
@@ -59,10 +79,32 @@
       "discord": "Discord Tag",
       "message": "Message",
       "submit": "Send",
+      "sending": "Sending...",
       "success": "Cheers! Message received.",
       "placeholderJoin": "TELL US ABOUT YOUR ROLES",
-      "placeholderHelp": "HOW CAN WE HELP?"
+      "placeholderHelp": "HOW CAN WE HELP?",
+      "placeholders": {
+        "name": "TRACER",
+        "email": "CHEERS@CAVALRY.HERE"
+      },
+      "errors": {
+        "nameShort": "Name is too short",
+        "emailInvalid": "Invalid email address",
+        "messageShort": "Message is too short",
+        "sendError": "Error sending message.",
+        "connectionError": "Could not connect to the server."
+      }
     }
+  },
+  "imprint": {
+    "section_ddg": "Information according to § 5 Digital Services Act (DDG)",
+    "section_contact": "Contact",
+    "section_editorial": "Editorial responsibility",
+    "section_disclaimer": "Disclaimer",
+    "section_dispute": "Consumer dispute resolution",
+    "disclaimer_text1": "Fischmarkt Fighters is not affiliated with, associated with, or endorsed by FACEIT, Blizzard Entertainment, or Overwatch. All trademarks are the property of their respective owners.",
+    "disclaimer_text2": "Fischmarkt Fighters is a private e-sports team. It is not a registered association (e.V.) or a commercial enterprise.",
+    "dispute_text": "We are not willing or obliged to participate in dispute resolution proceedings before a consumer arbitration board."
   },
   "footer": {
     "copyright": "© {{year}} Fischmarkt Fighters Hamburg",

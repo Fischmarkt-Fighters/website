@@ -58,9 +58,9 @@ function App() {
             </Routes>
           </main>
           
-          <footer className="py-24 border-t border-zinc-900 bg-black relative z-10">
+          <footer className="py-12 border-t border-zinc-900 bg-black relative z-10">
             <div className="container mx-auto px-4 text-center">
-              <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 mb-12">
+              <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 mb-6">
                 <Link to="/imprint" className="text-sm font-mono uppercase tracking-[0.3em] text-zinc-500 hover:text-white transition-colors">
                   {t('footer.imprint')}
                 </Link>

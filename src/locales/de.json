@@ -25,6 +25,23 @@
     "elo": "Faceit ELO",
     "topHeroes": "Top Helden",
     "privateProfile": "Profil Privat / Keine Daten",
+    "bestRank": "Bester Rang (Saison)",
+    "unranked": "Unranked",
+    "mainSelection": "Hauptauswahl",
+    "teamLeader": "Team Leader",
+    "roles": {
+      "tank": "Tank",
+      "damage": "Damage",
+      "support": "Support",
+      "flex": "Flex",
+      "coach": "Coach"
+    },
+    "stats": {
+      "winrate": "Winrate",
+      "kda": "KDA Ratio",
+      "totalWins": "Gesamte Siege",
+      "matches": "Matches"
+    },
     "statsMode": {
       "competitive_season": "Competitive (Saison)",
       "quickplay_lifetime": "Quick Play (Lifetime)",
@@ -45,7 +62,10 @@
     "teamForm": "Team Form (Letzte 10)",
     "win": "Sieg",
     "loss": "Niederlage",
-    "vs": "vs."
+    "vs": "vs.",
+    "status": "Status",
+    "tbd": "TBD",
+    "upcomingStatus": "ANSTEHEND"
   },
   "contact": {
     "title": "Komm an Bord",
@@ -59,10 +79,32 @@
       "discord": "Discord Tag",
       "message": "Nachricht",
       "submit": "Abschicken",
+      "sending": "Senden...",
       "success": "Moin! Nachricht ist raus.",
       "placeholderJoin": "ERZÄHL UNS VON DEINEN ROLLEN",
-      "placeholderHelp": "WIE KÖNNEN WIR HELFEN?"
+      "placeholderHelp": "WIE KÖNNEN WIR HELFEN?",
+      "placeholders": {
+        "name": "TRACER",
+        "email": "CHEERS@CAVALRY.HERE"
+      },
+      "errors": {
+        "nameShort": "Name ist zu kurz",
+        "emailInvalid": "Ungültige E-Mail-Adresse",
+        "messageShort": "Nachricht ist zu kurz",
+        "sendError": "Fehler beim Senden der Nachricht.",
+        "connectionError": "Es konnte keine Verbindung zum Server hergestellt werden."
+      }
     }
+  },
+  "imprint": {
+    "section_ddg": "Angaben gemäß § 5 Digitale-Dienste-Gesetz (DDG)",
+    "section_contact": "Kontakt",
+    "section_editorial": "Redaktionell verantwortlich",
+    "section_disclaimer": "Haftungsausschluss / Disclaimer",
+    "section_dispute": "Verbraucherstreitbeilegung",
+    "disclaimer_text1": "Fischmarkt Fighters steht in keiner geschäftlichen oder rechtlichen Verbindung zu FACEIT, Blizzard Entertainment oder Overwatch. Sämtliche Markenrechte liegen bei ihren jeweiligen Eigentümern.",
+    "disclaimer_text2": "Bei Fischmarkt Fighters handelt es sich um ein privates E-Sports-Team. Es ist weder ein eingetragener Verein (e.V.) noch ein gewerbliches Unternehmen.",
+    "dispute_text": "Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen."
   },
   "footer": {
     "copyright": "© {{year}} Fischmarkt Fighters Hamburg",

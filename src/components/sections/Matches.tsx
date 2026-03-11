@@ -58,7 +58,7 @@ export function Matches() {
                   </h3>
                   <div className="flex flex-wrap items-center gap-4 justify-center md:justify-start">
                     <span className="px-3 py-1 bg-zinc-900 border border-zinc-800 rounded text-[10px] font-mono uppercase font-bold text-zinc-400">
-                      {t('matches.status', 'Status')}: {latestChamp.status}
+                      {t('matches.status')}: {latestChamp.status}
                     </span>
                   </div>
                 </div>
@@ -156,7 +156,7 @@ export function Matches() {
             ) : (
                 <div className="p-8 border border-dashed border-zinc-800 rounded-lg text-center">
                   <p className="text-zinc-600 font-mono text-xs uppercase italic">
-                    {t('matches.noPast', 'No recent match history found.')}
+                    {t('matches.noPast')}
                   </p>
                 </div>
             )}
@@ -232,7 +232,7 @@ function MatchCard({ match, idx, isPast = false }: { match: Match, idx: number, 
                     <div className="flex items-center justify-between gap-4">
                         <div className="flex-1">
                             <span className="text-xs font-mono font-bold text-zinc-500 block mb-1">
-                                {match.started_at ? new Date(match.started_at * 1000).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: '2-digit' }) : 'TBD'}
+                                {match.started_at ? new Date(match.started_at * 1000).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: '2-digit' }) : t('matches.tbd')}
                             </span>
                             <span className="text-sm font-black font-sans uppercase italic truncate block">
                                 {ourTeam.nickname || 'Fischmarkt Fighters'}
@@ -262,7 +262,7 @@ function MatchCard({ match, idx, isPast = false }: { match: Match, idx: number, 
                                 <div className="flex flex-col items-center">
                                     <span className="text-xs font-mono font-bold text-zinc-600 mb-1 uppercase tracking-widest">{t('matches.vs')}</span>
                                     <div className="px-2 py-0.5 bg-zinc-900 text-[8px] font-mono border border-zinc-800 uppercase tracking-widest text-zinc-300">
-                                        {match.status || 'UPCOMING'}
+                                        {match.status || t('matches.upcomingStatus')}
                                     </div>
                                 </div>
                             )}
@@ -273,7 +273,7 @@ function MatchCard({ match, idx, isPast = false }: { match: Match, idx: number, 
                                 {match.started_at ? new Date(match.started_at * 1000).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' }) : ''}
                             </span>
                             <span className="text-sm font-black font-sans uppercase italic truncate block text-zinc-400 group-hover:text-zinc-200 transition-colors">
-                                {opponent.nickname || 'TBD'}
+                                {opponent.nickname || t('matches.tbd')}
                             </span>
                         </div>
                     </div>

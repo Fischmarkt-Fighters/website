@@ -6,18 +6,22 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Button } from '../ui/Button';
 
-const formSchema = z.object({
-  name: z.string().min(2, 'Name is too short'),
-  email: z.string().email('Invalid email address'),
-  message: z.string().min(10, 'Message is too short'),
-});
-
-type FormData = z.infer<typeof formSchema>;
+type FormData = {
+  name: string;
+  email: string;
+  message: string;
+};
 
 export function Contact() {
   const { t } = useTranslation();
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const formSchema = z.object({
+    name: z.string().min(2, t('contact.form.errors.nameShort')),
+    email: z.string().email(t('contact.form.errors.emailInvalid')),
+    message: z.string().min(10, t('contact.form.errors.messageShort')),
+  });
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>({
     resolver: zodResolver(formSchema)
@@ -40,11 +44,11 @@ export function Contact() {
         setTimeout(() => setSubmitted(false), 5000);
       } else {
         const errorData = await response.json();
-        alert(errorData.error || 'Fehler beim Senden der Nachricht.');
+        alert(errorData.error || t('contact.form.errors.sendError'));
       }
     } catch (error) {
       console.error('Contact error:', error);
-      alert('Es konnte keine Verbindung zum Server hergestellt werden.');
+      alert(t('contact.form.errors.connectionError'));
     } finally {
       setIsSubmitting(false);
     }
@@ -99,7 +103,7 @@ export function Contact() {
                   <input
                     {...register('name')}
                     className="w-full bg-transparent border-b border-zinc-800 py-4 text-white outline-none focus:outline-none focus:ring-0 focus:border-white focus:bg-white/5 px-4 -mx-4 transition-colors duration-500 font-sans placeholder:text-zinc-600 text-lg rounded-t-lg"
-                    placeholder="TRACER"
+                    placeholder={t('contact.form.placeholders.name')}
                     disabled={isSubmitting}
                   />
                   {errors.name && <p className="text-red-500 text-[10px] mt-2 font-mono uppercase italic tracking-wider">{errors.name.message}</p>}
@@ -112,7 +116,7 @@ export function Contact() {
                   <input
                     {...register('email')}
                     className="w-full bg-transparent border-b border-zinc-800 py-4 text-white outline-none focus:outline-none focus:ring-0 focus:border-white focus:bg-white/5 px-4 -mx-4 transition-colors duration-500 font-sans placeholder:text-zinc-600 text-lg rounded-t-lg"
-                    placeholder="CHEERS@CAVALRY.HERE"
+                    placeholder={t('contact.form.placeholders.email')}
                     disabled={isSubmitting}
                   />
                   {errors.email && <p className="text-red-500 text-[10px] mt-2 font-mono uppercase italic tracking-wider">{errors.email.message}</p>}
@@ -141,7 +145,7 @@ export function Contact() {
                   className="min-w-[240px] h-14 group relative overflow-hidden rounded-xl border border-white/10 hover:border-white/40 transition-all duration-500"
                 >
                   <span className="relative z-10 font-black italic uppercase tracking-widest">
-                    {isSubmitting ? 'Sending...' : t('contact.form.submit')}
+                    {isSubmitting ? t('contact.form.sending') : t('contact.form.submit')}
                   </span>
                   {!isSubmitting && (
                     <>

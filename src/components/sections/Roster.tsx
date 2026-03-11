@@ -65,11 +65,18 @@ function PlayerCard({ player, idx, mode }: { player: Player, idx: number, mode: 
 
                 <div className="min-w-0 flex-1 flex flex-col justify-center">
                     <div className="flex items-center gap-1.5 mb-1.5 sm:mb-2 min-w-0">
-                        <h3 className="text-lg sm:text-xl md:text-2xl font-black font-sans italic uppercase tracking-tighter text-white leading-none truncate pr-1">
+                        {player.isLeader && (
+                            <span title={t('roster.teamLeader')} className="shrink-0 cursor-help">
+                                <Crown className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-500 fill-yellow-500/20" />
+                            </span>
+                        )}
+                        <h3 
+                            className="text-base sm:text-lg md:text-xl font-black font-sans italic uppercase tracking-tighter text-white leading-none truncate pr-1 cursor-default"
+                            title={player.nickname}
+                        >
                             {player.nickname}
                         </h3>
                         <div className="flex items-center gap-1 shrink-0">
-                            {player.isLeader && <Crown className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-500 fill-yellow-500/20" />}
                             <div className="flex items-center justify-center w-4 h-4 sm:w-5 sm:h-5 rounded-full border border-white/20 bg-white/5 text-[8px] sm:text-[10px] font-mono font-bold text-zinc-400 group-hover:text-white group-hover:border-white/40 transition-all shadow-inner" title="Endorsement Level">
                                 {endorsement}
                             </div>
@@ -92,23 +99,25 @@ function PlayerCard({ player, idx, mode }: { player: Player, idx: number, mode: 
             {/* Rank Icon */}
             {rank?.rank_icon ? (
                 <div className="relative shrink-0 flex flex-col items-center">
-                    <span className="text-[8px] sm:text-[9px] font-mono text-zinc-500 uppercase tracking-widest mb-1 font-bold">Best Rank (Season)</span>
+                    <span className="text-[8px] sm:text-[9px] font-mono text-zinc-500 uppercase tracking-widest mb-1 font-bold">{t('roster.bestRank')}</span>
                     <img src={rank.rank_icon} alt="rank" className="w-10 h-10 sm:w-14 sm:h-14 object-contain drop-shadow-white group-hover:scale-110 transition-transform duration-500" />
                     <div className="mt-1 bg-white/10 backdrop-blur-md border border-white/20 px-1 sm:px-1.5 rounded-full text-[7px] sm:text-[8px] font-mono font-bold text-white uppercase whitespace-nowrap">
                         {rank.division} {rank.tier}
                     </div>
                 </div>
             ) : (
-                <div className="relative shrink-0 w-10 h-10 sm:w-14 sm:h-14 flex flex-col items-center justify-center">
-                    <span className="text-[8px] sm:text-[9px] font-mono text-zinc-500 uppercase tracking-widest mb-1 font-bold whitespace-nowrap">Best Rank (Season)</span>
-                    <span className="text-[9px] sm:text-[10px] font-mono text-zinc-600 uppercase italic mt-1">Unranked</span>
+                <div className="relative shrink-0 flex flex-col items-center">
+                    <span className="text-[8px] sm:text-[9px] font-mono text-zinc-500 uppercase tracking-widest mb-1 font-bold">{t('roster.bestRank')}</span>
+                    <div className="w-10 h-10 sm:w-14 sm:h-14 flex items-center justify-center">
+                        <span className="text-[9px] sm:text-[10px] font-mono text-zinc-600 uppercase italic">{t('roster.unranked')}</span>
+                    </div>
                 </div>
             )}
           </div>
 
           <div className="px-6 text-center">
               <span className="text-[8px] font-mono text-zinc-600 uppercase tracking-[0.4em] block border-y border-zinc-800/50 py-1">
-                {mode === 'competitive_season' ? 'Season Statistics' : 'Lifetime Statistics'}
+                {mode === 'competitive_season' ? t('roster.statsMode.competitive_season') : t('roster.statsMode.quickplay_lifetime')}
               </span>
           </div>
 
@@ -117,7 +126,7 @@ function PlayerCard({ player, idx, mode }: { player: Player, idx: number, mode: 
               <div className="bg-white/5 rounded-2xl p-3 border border-white/5 group-hover:border-white/10 transition-colors">
                   <div className="flex items-center gap-2 mb-1">
                       <Target className="w-3 h-3 text-zinc-500" />
-                      <span className="text-[7px] font-mono font-bold text-zinc-500 uppercase tracking-widest">Winrate</span>
+                      <span className="text-[7px] font-mono font-bold text-zinc-500 uppercase tracking-widest">{t('roster.stats.winrate')}</span>
                   </div>
                   <div className="flex items-center justify-between">
                       <span className="text-lg font-black font-sans italic text-white">{(winrate * 100).toFixed(0)}%</span>
@@ -130,7 +139,7 @@ function PlayerCard({ player, idx, mode }: { player: Player, idx: number, mode: 
               <div className="bg-white/5 rounded-2xl p-3 border border-white/5 group-hover:border-white/10 transition-colors">
                   <div className="flex items-center gap-2 mb-1">
                       <BarChart3 className="w-3 h-3 text-zinc-500" />
-                      <span className="text-[7px] font-mono font-bold text-zinc-500 uppercase tracking-widest">KDA Ratio</span>
+                      <span className="text-[7px] font-mono font-bold text-zinc-500 uppercase tracking-widest">{t('roster.stats.kda')}</span>
                   </div>
                   <span className="text-lg font-black font-sans italic text-white leading-none">{kda}</span>
               </div>
@@ -138,7 +147,7 @@ function PlayerCard({ player, idx, mode }: { player: Player, idx: number, mode: 
               <div className="bg-white/5 rounded-2xl p-3 border border-white/5 group-hover:border-white/10 transition-colors">
                   <div className="flex items-center gap-2 mb-1">
                       <Trophy className="w-3 h-3 text-zinc-500" />
-                      <span className="text-[7px] font-mono font-bold text-zinc-500 uppercase tracking-widest">Total Wins</span>
+                      <span className="text-[7px] font-mono font-bold text-zinc-500 uppercase tracking-widest">{t('roster.stats.totalWins')}</span>
                   </div>
                   <span className="text-lg font-black font-sans italic text-white leading-none">{gamesWon}</span>
               </div>
@@ -146,7 +155,7 @@ function PlayerCard({ player, idx, mode }: { player: Player, idx: number, mode: 
               <div className="bg-white/5 rounded-2xl p-3 border border-white/5 group-hover:border-white/10 transition-colors">
                   <div className="flex items-center gap-2 mb-1">
                       <Play className="w-3 h-3 text-zinc-500" />
-                      <span className="text-[7px] font-mono font-bold text-zinc-500 uppercase tracking-widest">Matches</span>
+                      <span className="text-[7px] font-mono font-bold text-zinc-500 uppercase tracking-widest">{t('roster.stats.matches')}</span>
                   </div>
                   <span className="text-lg font-black font-sans italic text-white leading-none">{gamesPlayed}</span>
               </div>
@@ -156,7 +165,7 @@ function PlayerCard({ player, idx, mode }: { player: Player, idx: number, mode: 
           <div className="px-8 pb-8 mt-auto">
             <div className="flex items-center gap-3 mb-4">
                 <div className="h-[1px] flex-1 bg-zinc-800" />
-                <h4 className="text-[9px] font-mono text-zinc-500 uppercase tracking-[0.4em] whitespace-nowrap">Main Selection</h4>
+                <h4 className="text-[9px] font-mono text-zinc-500 uppercase tracking-[0.4em] whitespace-nowrap">{t('roster.mainSelection')}</h4>
                 <div className="h-[1px] flex-1 bg-zinc-800" />
             </div>
             
@@ -192,21 +201,27 @@ export function Roster() {
   const [statsMode, setStatsMode] = useState<StatsMode>('competitive_season');
 
   const rolesToRender = [
-    { id: 'tank', label: 'Tank', icon: <Shield className="w-6 h-6" /> },
-    { id: 'damage', label: 'Damage', icon: <Swords className="w-6 h-6" /> },
-    { id: 'support', label: 'Support', icon: <Cross className="w-6 h-6" /> },
-    { id: 'flex', label: 'Flex', icon: <Zap className="w-6 h-6" /> },
-    { id: 'coach', label: 'Coach', icon: <Target className="w-6 h-6" /> }
+    { id: 'tank', label: t('roster.roles.tank'), icon: <Shield className="w-6 h-6" /> },
+    { id: 'damage', label: t('roster.roles.damage'), icon: <Swords className="w-6 h-6" /> },
+    { id: 'support', label: t('roster.roles.support'), icon: <Cross className="w-6 h-6" /> },
+    { id: 'flex', label: t('roster.roles.flex'), icon: <Zap className="w-6 h-6" /> },
+    { id: 'coach', label: t('roster.roles.coach'), icon: <Target className="w-6 h-6" /> }
   ];
 
   const getPlayersByRole = (roleId: string) => {
       if (!teamMembers) return [];
-      return teamMembers.filter(p => {
-          const roles = p.roles.map(r => r.toLowerCase());
-          if (roleId === 'damage') return roles.includes('damage') || roles.includes('dps');
-          if (roleId === 'support') return roles.includes('support') || roles.includes('heal');
-          return roles.includes(roleId);
-      });
+      return teamMembers
+          .filter(p => {
+              const roles = p.roles.map(r => r.toLowerCase());
+              if (roleId === 'damage') return roles.includes('damage') || roles.includes('dps');
+              if (roleId === 'support') return roles.includes('support') || roles.includes('heal');
+              return roles.includes(roleId);
+          })
+          .sort((a, b) => {
+              if (a.isLeader && !b.isLeader) return -1;
+              if (!a.isLeader && b.isLeader) return 1;
+              return 0;
+          });
   };
 
   return (
