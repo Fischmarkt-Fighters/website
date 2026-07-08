@@ -8,42 +8,28 @@ steps:
     commands:
       - npm install
       - npm run build
-      - mkdir deploy
+      - mkdir -p deploy
       - cp -rv dist deploy/
       - cp server.mjs deploy/
       - cp package.json deploy/
       - cp package-lock.json deploy/
       - cd deploy && npm install --omit=dev
 
-  - name: Upload
-    image: appleboy/drone-scp
-    settings:
-      host:
-        from_secret: address
-      username: root
-      password:
-        from_secret: ssh_password
-      source: deploy/
-      target: /var/lib/docker/volumes/ff_website/_data
-      strip_components: 1
-
   - name: Deploy
-    image: appleboy/drone-ssh
-    settings:
-      host:
-        from_secret: address
-      username: root
-      password:
-        from_secret: ssh_password
-      script:
-        - docker stop ff_website || true
-        - docker rm ff_website || true
-        - |
-          docker run -d \
-            --name ff_website \
-            --restart always \
-            -p 680:3001 \
-            -p 6443:3001 \
-            -v ff_website:/app \
-            -w /app \
-            node:20-alpine node server.mjs
+    image: docker:27-cli
+    commands:
+      - docker ps
+      - docker volume create ff_website
+      - docker run --rm -v ff_website:/target alpine sh -c "rm -rf /target/*"
+      - tar -C deploy -cf - . | docker run --rm -i -v ff_website:/target alpine sh -c "tar -C /target -xf -"
+      - docker stop ff_website || true
+      - docker rm ff_website || true
+      - |
+        docker run -d \
+          --name ff_website \
+          --restart always \
+          -p 680:3001 \
+          -p 6443:3001 \
+          -v ff_website:/app \
+          -w /app \
+          node:20-alpine node server.mjs
